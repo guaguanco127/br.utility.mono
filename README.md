@@ -19,7 +19,7 @@ You can use as a Max for Live device within Ableton Live Suite, or as an abstrac
 
 [Ableton Max for Live Device](https://github.com/guaguanco127/br.utility.mono.1.0/tree/main/Ableton%20Max%20For%20Live) To use inside of Ableton Suite   
 [Max/MSP Abstraction](https://github.com/guaguanco127/br.utility.mono.1.0/tree/main/MaxMSP%20Abstraction) To use as an abstraction within Max/MSP   
-[Max/MSP External](https://github.com/guaguanco127/br.utility.mono.1.0/tree/main/MaxMSP%20Externals) To use as an external object within Max/MSP     
+[Max/MSP External](https://github.com/guaguanco127/br.utility.mono.1.0/tree/main/MaxMSP%20External) To use as an external object within Max/MSP     
 [Max/MSP RNBO for External or VST](https://github.com/guaguanco127/br.utility.mono.1.0/tree/main/RNBO%20Patchers%20for%20External%20or%20VST) To build an audio plugin in VST or AU for both Mac and Windows.   
 
 
