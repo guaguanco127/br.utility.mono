@@ -13,7 +13,7 @@
             85.0,
             104.0,
             900.0,
-            360.0
+            443.0
         ],
         "bglocked": 0,
         "openinpresentation": 1,
@@ -39,7 +39,7 @@
         "enablehscroll": 1,
         "enablevscroll": 1,
         "devicewidth": 58.0,
-        "description": "br.utility.mono.ui.2.0 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+        "description": "br.utility.mono.ui.2.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
         "digest": "",
         "tags": "",
         "style": "",
@@ -61,7 +61,7 @@
                         360.0,
                         33.0
                     ],
-                    "text": "br.utility.mono.ui.2.0 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/",
+                    "text": "br.utility.mono.ui.2.1 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/",
                     "linecount": 2
                 }
             },
@@ -286,12 +286,13 @@
                     "fontsize": 12.0,
                     "maxclass": "newobj",
                     "id": "obj-core",
-                    "text": "br.utility.mono.2.0",
+                    "text": "br.utility.mono.2.1",
                     "numinlets": 4,
-                    "numoutlets": 2,
+                    "numoutlets": 3,
                     "outlettype": [
                         "signal",
-                        "signal"
+                        "signal",
+                        ""
                     ],
                     "patching_rect": [
                         15.0,
@@ -334,7 +335,7 @@
                         260.0,
                         75.0
                     ],
-                    "text": "[br.utility.mono.2.0] is the real object: open it to see the gen~ inside. This file only adds the controls, so you can also patch the core directly and switch Mono with a signal."
+                    "text": "[br.utility.mono.2.1] is the real object: open it to see the gen~ inside. This file only adds the controls, so you can also patch the core directly and switch Mono with a signal."
                 }
             },
             {
@@ -376,7 +377,7 @@
             {
                 "box": {
                     "angle": 270.0,
-                    "annotation": "br.utility.mono.ui.2.0 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+                    "annotation": "br.utility.mono.ui.2.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
                     "background": 1,
                     "bgcolor": [
                         0.0,
@@ -384,7 +385,7 @@
                         0.0,
                         1.0
                     ],
-                    "hint": "br.utility.mono.ui.2.0 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+                    "hint": "br.utility.mono.ui.2.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
                     "id": "obj-panel",
                     "maxclass": "panel",
                     "mode": 0,
@@ -405,6 +406,40 @@
                     ],
                     "proportion": 0.5,
                     "rounded": 7
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "outlet",
+                    "id": "obj-1",
+                    "numinlets": 1,
+                    "numoutlets": 0,
+                    "outlettype": [],
+                    "patching_rect": [
+                        280.0,
+                        180.0,
+                        30.0,
+                        30.0
+                    ],
+                    "comment": "State (Message): mono 0/1 and mix 0-3, sent the moment a control changes. Numbers only (signals are not reported). Pick them out by name: [route mono mix]"
+                }
+            },
+            {
+                "box": {
+                    "maxclass": "comment",
+                    "id": "obj-2",
+                    "numinlets": 1,
+                    "numoutlets": 0,
+                    "outlettype": [],
+                    "patching_rect": [
+                        15.0,
+                        363.0,
+                        565.0,
+                        47.0
+                    ],
+                    "text": "The last outlet (State) reports the controls as mono 0/1 and mix 0-3 the moment they change. It comes from the core, so moving a control, numbers into the inlets and preset recalls all show up. Pick them out by name with [route mono mix].",
+                    "fontname": "Arial",
+                    "fontsize": 12.0
                 }
             }
         ],
@@ -501,6 +536,18 @@
                     ],
                     "destination": [
                         "obj-out2",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-core",
+                        2
+                    ],
+                    "destination": [
+                        "obj-1",
                         0
                     ]
                 }
