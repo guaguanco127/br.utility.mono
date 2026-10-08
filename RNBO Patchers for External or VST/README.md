@@ -1,11 +1,11 @@
-# Max/MSP RNBO Patch for External or VST Creation: br.utility.mono.rnbo.2.0  
+# Max/MSP RNBO Patch for External or VST Creation: br.utility.mono.rnbo.2.1  
    
 By Brian Riordan  
 [guaguanco127@gmail.com](mailto:guaguanco127@gmail.com)  
 [brianriordanmusic@gmail.com](mailto:brianriordanmusic@gmail.com)  
 [https://www.brianriordanmusic.com/](https://www.brianriordanmusic.com/) 
   
-Repository for br.utility.mono.2.0, with all related files, can be found here: [https://github.com/guaguanco127/br.utility.mono](https://github.com/guaguanco127/br.utility.mono)  
+Repository for br.utility.mono.2.1, with all related files, can be found here: [https://github.com/guaguanco127/br.utility.mono](https://github.com/guaguanco127/br.utility.mono)  
 Additional programs can be found here: [https://github.com/guaguanco127/br.max](https://github.com/guaguanco127/br.max)
 
 These files were created with Max 9 and RNBO.
@@ -33,7 +33,9 @@ Mix sets how much the sum is turned down, because L + R adds up to a different l
 
 When in doubt use -6 dB: it is the only setting that can never clip.
 
-One patch now does both jobs (1.0 had two). Inside [rnbo~], the Mono and Mix params are the plugin parameters, and inlets 3 and 4 set the same params, so the external has the same four inlets as the abstraction: L, R, Mono, Mix. The gen~ code inside is the same as br.utility.mono.2.0.
+One patch now does both jobs (1.0 had two). Inside [rnbo~], the Mono and Mix params are the plugin parameters, and inlets 3 and 4 set the same params, so the external has the same four inlets as the abstraction: L, R, Mono, Mix. The gen~ code inside is the same as br.utility.mono.2.1.
+
+The settings also come out of [rnbo~]'s rightmost outlet as `mono 1` and `mix 3` the moment they change (an [outport mono] and an [outport mix] inside), matching the State outlet of the abstractions. The patch shows it picked out with [route mono mix].
 
 ## <a name="External"></a>What is an External for Max/MSP?
 
@@ -47,7 +49,7 @@ A VST is a third party audio plugin generally run within a digital audio worksta
 
 1. Make sure Max 9 is installed on your computer, and that you have an RNBO license.
 
-2. Open br.utility.mono.rnbo.2.0.maxpat.
+2. Open br.utility.mono.rnbo.2.1.maxpat.
 
 3. Double-click the [rnbo~] object while the patch is locked.
 
@@ -55,11 +57,11 @@ A VST is a third party audio plugin generally run within a digital audio worksta
 
 5. Select "Max External Export".
 
-6. Name the object br.utility.mono.2.0~ and export.
+6. Name the object br.utility.mono.2.1~ and export.
 
-**Keep the ~ at the end of the name.** Without it, the external has exactly the same name as the abstraction br.utility.mono.2.0, and Max loads whichever one it finds first, so you can't be sure which one you're using. The ~ also follows the Max convention for objects that process audio. Any other name is fine as long as it isn't the name of an abstraction you also use.
+**Keep the ~ at the end of the name.** Without it, the external has exactly the same name as the abstraction br.utility.mono.2.1, and Max loads whichever one it finds first, so you can't be sure which one you're using. The ~ also follows the Max convention for objects that process audio. Any other name is fine as long as it isn't the name of an abstraction you also use.
 
-7. Copy the exported .mxo (Mac) or .mxe64 (Windows) into a folder on Max's search path, for example Documents/Max 9/Externals, and add that folder in Options > File Preferences if it isn't listed. Then create an object called br.utility.mono.2.0~ in any patch. It has the same inlets as the abstraction (L, R, Mono, Mix), except that Mono takes numbers only.
+7. Copy the exported .mxo (Mac) or .mxe64 (Windows) into a folder on Max's search path, for example Documents/Max 9/Externals, and add that folder in Options > File Preferences if it isn't listed. Then create an object called br.utility.mono.2.1~ in any patch. It has the same inlets as the abstraction (L, R, Mono, Mix), except that Mono takes numbers only.
 
 ## <a name="ExportVST"></a>How To Export as a VST or AU Audio Plugin
 
@@ -67,7 +69,7 @@ A VST is a third party audio plugin generally run within a digital audio worksta
 
 1. Make sure Max 9 is installed on your computer, and that you have an RNBO license.
 
-2. Open br.utility.mono.rnbo.2.0.maxpat.
+2. Open br.utility.mono.rnbo.2.1.maxpat.
 
 3. Double-click the [rnbo~] object while the patch is locked.
 

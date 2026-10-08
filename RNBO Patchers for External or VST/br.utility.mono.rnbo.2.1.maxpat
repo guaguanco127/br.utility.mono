@@ -39,7 +39,7 @@
         "enablehscroll": 1,
         "enablevscroll": 1,
         "devicewidth": 0.0,
-        "description": "br.utility.mono.rnbo.2.0 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+        "description": "br.utility.mono.rnbo.2.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
         "digest": "",
         "tags": "",
         "style": "",
@@ -58,7 +58,7 @@
                         520.0,
                         40.0
                     ],
-                    "text": "br.utility.mono.rnbo.2.0 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/",
+                    "text": "br.utility.mono.rnbo.2.1 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/",
                     "linecount": 2
                 }
             },
@@ -859,7 +859,7 @@
                                                             560.0
                                                         ],
                                                         "parameter_enable": 0,
-                                                        "code": "// br.utility.mono.2.0 -- stereo to mono, click-free\n// Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/\n// MUST MATCH: the core, the UI, the RNBO host and the M4L device embed this same code\n// in1/in2 audio L/R\n// in3 Mono 0/1, signal or number. 0 = stereo passes through, 1 = L + R to both outputs\n// in4 Mix 0/1/2/3, how L + R are combined:\n//   0 = 0 dB   sound on one side only, the other side silent: the sum is the same level\n//   1 = -3 dB  stereo, L and R different: they add up about +3 dB louder, so take 3 dB off\n//   2 = -4.5 dB full mix, centered and wide parts: halfway, the smallest error for both\n//   3 = -6 dB  dual mono, L = R: they add up exactly twice as loud, so halve it, never clips\n// out1/out2 the same mono signal on both sides when Mono is on\n// Mono on/off crossfades along a raised-cosine S-curve in exactly 10 ms, as br.utility.mute.\n// A Mix change glides over 10 ms on amplitude and lands exactly on its target, as br.utility.gain.\n\n// fade position: 0 = stereo, 1 = mono\nHistory pos(1);\n// mono sum gain, starts at the default -6 dB\nHistory gS(0.5);\n\n// read state first\np = pos;\ng = gS;\n\n// Mono on/off: S-curve crossfade\ngoal = clamp(in3, 0, 1);\ninc = 1 / mstosamps(10);\nif (p < goal) {\n    p = min(p + inc, goal);\n}\nelse if (p > goal) {\n    p = max(p - inc, goal);\n}\nw = 0.5 - 0.5 * cos(p * pi);\n\n// Mix: 0 / -3 / -4.5 / -6 dB. -3 = sqrt(0.5) and -6 = 0.5 exactly; -4.5 = 0.5^0.75, halfway between them\nm = clamp(floor(in4 + 0.5), 0, 3);\nmg = (m < 0.5) ? 1 : ((m < 1.5) ? sqrt(0.5) : ((m < 2.5) ? pow(0.5, 0.75) : 0.5));\nk = 1 - exp(-1 / max(1, mstosamps(10)));\ng = g + (mg - g) * k;\n// within -120 dB of the target: land on it\nif (abs(mg - g) < 0.000001) {\n    g = mg;\n}\n\nmono = (in1 + in2) * g;\nout1 = in1 + (mono - in1) * w;\nout2 = in2 + (mono - in2) * w;\n\n// write state last\npos = p;\ngS = g;\n",
+                                                        "code": "// br.utility.mono.2.1 -- stereo to mono, click-free\n// Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/\n// MUST MATCH: the core, the UI, the RNBO host and the M4L device embed this same code\n// in1/in2 audio L/R\n// in3 Mono 0/1, signal or number. 0 = stereo passes through, 1 = L + R to both outputs\n// in4 Mix 0/1/2/3, how L + R are combined:\n//   0 = 0 dB   sound on one side only, the other side silent: the sum is the same level\n//   1 = -3 dB  stereo, L and R different: they add up about +3 dB louder, so take 3 dB off\n//   2 = -4.5 dB full mix, centered and wide parts: halfway, the smallest error for both\n//   3 = -6 dB  dual mono, L = R: they add up exactly twice as loud, so halve it, never clips\n// out1/out2 the same mono signal on both sides when Mono is on\n// Mono on/off crossfades along a raised-cosine S-curve in exactly 10 ms, as br.utility.mute.\n// A Mix change glides over 10 ms on amplitude and lands exactly on its target, as br.utility.gain.\n\n// fade position: 0 = stereo, 1 = mono\nHistory pos(1);\n// mono sum gain, starts at the default -6 dB\nHistory gS(0.5);\n\n// read state first\np = pos;\ng = gS;\n\n// Mono on/off: S-curve crossfade\ngoal = clamp(in3, 0, 1);\ninc = 1 / mstosamps(10);\nif (p < goal) {\n    p = min(p + inc, goal);\n}\nelse if (p > goal) {\n    p = max(p - inc, goal);\n}\nw = 0.5 - 0.5 * cos(p * pi);\n\n// Mix: 0 / -3 / -4.5 / -6 dB. -3 = sqrt(0.5) and -6 = 0.5 exactly; -4.5 = 0.5^0.75, halfway between them\nm = clamp(floor(in4 + 0.5), 0, 3);\nmg = (m < 0.5) ? 1 : ((m < 1.5) ? sqrt(0.5) : ((m < 2.5) ? pow(0.5, 0.75) : 0.5));\nk = 1 - exp(-1 / max(1, mstosamps(10)));\ng = g + (mg - g) * k;\n// within -120 dB of the target: land on it\nif (abs(mg - g) < 0.000001) {\n    g = mg;\n}\n\nmono = (in1 + in2) * g;\nout1 = in1 + (mono - in1) * w;\nout2 = in2 + (mono - in2) * w;\n\n// write state last\npos = p;\ngS = g;\n",
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0
                                                     }
@@ -1223,13 +1223,13 @@
                                     "numoutlets": 0,
                                     "patching_rect": [
                                         42.0,
-                                        260.0,
+                                        393.0,
                                         520.0,
                                         75.0
                                     ],
                                     "fontname": "Lato",
                                     "fontsize": 12.0,
-                                    "text": "gen~ code MUST MATCH br.utility.mono.2.0 (open both: same codebox). param Mono and param Mix = the plugin parameters (VST/AU). in 3 and in 4 set the same params, so the exported external [br.utility.mono.2.0~] has the same four inlets as the abstraction: L, R, Mono, Mix."
+                                    "text": "gen~ code MUST MATCH br.utility.mono.2.1 (open both: same codebox). param Mono and param Mix = the plugin parameters (VST/AU). in 3 and in 4 set the same params, so the exported external [br.utility.mono.2.1~] has the same four inlets as the abstraction: L, R, Mono, Mix."
                                 }
                             },
                             {
@@ -1357,6 +1357,91 @@
                                     "text": "param Mix 3 @enum 0dB -3dB -4.5dB -6dB @order 2",
                                     "varname": "Mix"
                                 }
+                            },
+                            {
+                                "box": {
+                                    "id": "obj-st10",
+                                    "maxclass": "newobj",
+                                    "text": "change",
+                                    "numinlets": 1,
+                                    "numoutlets": 3,
+                                    "outlettype": [
+                                        "",
+                                        "",
+                                        ""
+                                    ],
+                                    "patching_rect": [
+                                        298.0,
+                                        275.0,
+                                        50.0,
+                                        23.0
+                                    ]
+                                }
+                            },
+                            {
+                                "box": {
+                                    "id": "obj-st20",
+                                    "maxclass": "newobj",
+                                    "text": "outport mono",
+                                    "numinlets": 1,
+                                    "numoutlets": 0,
+                                    "patching_rect": [
+                                        298.0,
+                                        310.0,
+                                        90.0,
+                                        23.0
+                                    ]
+                                }
+                            },
+                            {
+                                "box": {
+                                    "id": "obj-st11",
+                                    "maxclass": "newobj",
+                                    "text": "change",
+                                    "numinlets": 1,
+                                    "numoutlets": 3,
+                                    "outlettype": [
+                                        "",
+                                        "",
+                                        ""
+                                    ],
+                                    "patching_rect": [
+                                        485.0,
+                                        275.0,
+                                        50.0,
+                                        23.0
+                                    ]
+                                }
+                            },
+                            {
+                                "box": {
+                                    "id": "obj-st21",
+                                    "maxclass": "newobj",
+                                    "text": "outport mix",
+                                    "numinlets": 1,
+                                    "numoutlets": 0,
+                                    "patching_rect": [
+                                        485.0,
+                                        310.0,
+                                        90.0,
+                                        23.0
+                                    ]
+                                }
+                            },
+                            {
+                                "box": {
+                                    "id": "obj-st3",
+                                    "maxclass": "comment",
+                                    "numinlets": 1,
+                                    "numoutlets": 0,
+                                    "text": "State: each outport sends mono 0/1 and mix 0-3 out of the rnbo~ rightmost outlet the moment it changes. Same as the State outlet of the abstractions.",
+                                    "patching_rect": [
+                                        42.0,
+                                        345.0,
+                                        520.0,
+                                        33.0
+                                    ]
+                                }
                             }
                         ],
                         "lines": [
@@ -1453,6 +1538,54 @@
                                     "destination": [
                                         "obj-3",
                                         3
+                                    ]
+                                }
+                            },
+                            {
+                                "patchline": {
+                                    "source": [
+                                        "obj-7",
+                                        0
+                                    ],
+                                    "destination": [
+                                        "obj-st10",
+                                        0
+                                    ]
+                                }
+                            },
+                            {
+                                "patchline": {
+                                    "source": [
+                                        "obj-st10",
+                                        0
+                                    ],
+                                    "destination": [
+                                        "obj-st20",
+                                        0
+                                    ]
+                                }
+                            },
+                            {
+                                "patchline": {
+                                    "source": [
+                                        "obj-12",
+                                        0
+                                    ],
+                                    "destination": [
+                                        "obj-st11",
+                                        0
+                                    ]
+                                }
+                            },
+                            {
+                                "patchline": {
+                                    "source": [
+                                        "obj-st11",
+                                        0
+                                    ],
+                                    "destination": [
+                                        "obj-st21",
+                                        0
                                     ]
                                 }
                             }
@@ -1609,7 +1742,7 @@
                         340.0,
                         117.0
                     ],
-                    "text": "EXPORT NAME: br.utility.mono.2.0~\nMax External Export asks for a name: keep the ~ at the end. Without it the external has the same name as the abstraction br.utility.mono.2.0, and Max loads whichever it finds first. Audio Plugin Export (VST3/AU): any name; the Mono and Mix params appear in your DAW.",
+                    "text": "EXPORT NAME: br.utility.mono.2.1~\nMax External Export asks for a name: keep the ~ at the end. Without it the external has the same name as the abstraction br.utility.mono.2.1, and Max loads whichever it finds first. Audio Plugin Export (VST3/AU): any name; the Mono and Mix params appear in your DAW.",
                     "fontname": "Arial",
                     "fontsize": 12.0
                 }
@@ -1629,6 +1762,79 @@
                         232.0,
                         134.0,
                         150.0,
+                        22.0
+                    ]
+                }
+            },
+            {
+                "box": {
+                    "id": "obj-st4",
+                    "maxclass": "comment",
+                    "numinlets": 1,
+                    "numoutlets": 0,
+                    "text": "rnbo~ rightmost outlet = State: mono 0/1 and mix 0-3 (from the outports inside).",
+                    "patching_rect": [
+                        204.0,
+                        197.0,
+                        443.0,
+                        20.0
+                    ]
+                }
+            },
+            {
+                "box": {
+                    "id": "obj-st5",
+                    "maxclass": "newobj",
+                    "text": "route mono mix",
+                    "numinlets": 2,
+                    "numoutlets": 3,
+                    "outlettype": [
+                        "",
+                        "",
+                        ""
+                    ],
+                    "patching_rect": [
+                        115.0,
+                        265.0,
+                        130.0,
+                        22.0
+                    ]
+                }
+            },
+            {
+                "box": {
+                    "id": "obj-st60",
+                    "maxclass": "number",
+                    "numinlets": 1,
+                    "numoutlets": 2,
+                    "outlettype": [
+                        "",
+                        "bang"
+                    ],
+                    "parameter_enable": 0,
+                    "patching_rect": [
+                        115.0,
+                        304.0,
+                        50.0,
+                        22.0
+                    ]
+                }
+            },
+            {
+                "box": {
+                    "id": "obj-st61",
+                    "maxclass": "number",
+                    "numinlets": 1,
+                    "numoutlets": 2,
+                    "outlettype": [
+                        "",
+                        "bang"
+                    ],
+                    "parameter_enable": 0,
+                    "patching_rect": [
+                        170.0,
+                        304.0,
+                        50.0,
                         22.0
                     ]
                 }
@@ -1727,6 +1933,42 @@
                     ],
                     "destination": [
                         "obj-7",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-7",
+                        2
+                    ],
+                    "destination": [
+                        "obj-st5",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-st5",
+                        0
+                    ],
+                    "destination": [
+                        "obj-st60",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-st5",
+                        1
+                    ],
+                    "destination": [
+                        "obj-st61",
                         0
                     ]
                 }
