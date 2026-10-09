@@ -15,7 +15,7 @@
             1160.0,
             640.0
         ],
-        "description": "_br.utility.mono.example.2.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+        "description": "_br.utility.mono.example.2.2 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
         "showontab": 1,
         "boxes": [
             {
@@ -33,7 +33,7 @@
                         470.0,
                         33.0
                     ],
-                    "text": "_br.utility.mono.example.2.1 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
+                    "text": "_br.utility.mono.example.2.2 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
                 }
             },
             {
@@ -86,7 +86,7 @@
                         560.0,
                         60.0
                     ],
-                    "text": "Two files, same DSP inside:\nbr.utility.mono.2.1 = core, no UI (in: L, R, Mono, Mix)\nbr.utility.mono.ui.2.1 = the same with a Mono button and a Mix menu, for bpatchers\nUI and core have the same inlets and outlets, so either swaps in without rewiring."
+                    "text": "Two files, same DSP inside:\nbr.utility.mono.2.2 = core, no UI (in: L, R, Mono, Mix)\nbr.utility.mono.ui.2.2 = the same with a Mono button and a Mix menu, for bpatchers\nUI and core have the same inlets and audio outlets (the UI adds State last), so either swaps in without rewiring."
                 }
             },
             {
@@ -901,7 +901,7 @@
                         160.0,
                         20.0
                     ],
-                    "text": "A: br.utility.mono.ui.2.1"
+                    "text": "A: br.utility.mono.ui.2.2"
                 }
             },
             {
@@ -915,7 +915,7 @@
                     "lockeddragscroll": 0,
                     "lockedsize": 0,
                     "maxclass": "bpatcher",
-                    "name": "br.utility.mono.ui.2.1.maxpat",
+                    "name": "br.utility.mono.ui.2.2.maxpat",
                     "numinlets": 4,
                     "numoutlets": 3,
                     "offset": [
@@ -1061,7 +1061,7 @@
                     "id": "obj-b",
                     "maxclass": "newobj",
                     "numinlets": 4,
-                    "numoutlets": 3,
+                    "numoutlets": 2,
                     "outlettype": [
                         "signal",
                         "signal",
@@ -1073,7 +1073,7 @@
                         255.0,
                         22.0
                     ],
-                    "text": "br.utility.mono.2.1"
+                    "text": "br.utility.mono.2.2"
                 }
             },
             {
@@ -1238,7 +1238,7 @@
                         560.0,
                         47.0
                     ],
-                    "text": "State outlet: every UI and core has a last outlet that sends mono 0/1 and mix 0-3 the moment a control changes (numbers only, not signals). Open [p State outlet] (also a tab at the top) to see it read by name with [route mono mix]."
+                    "text": "State outlet: the UI has a last outlet that sends mono 0/1 and mix 0-3 the moment a control changes. The core has none: whatever drives it already knows the values. Open [p State outlet] (also a tab at the top) to see it read by name with [route mono mix]."
                 }
             },
             {
@@ -1301,7 +1301,7 @@
                                         600.0,
                                         47.0
                                     ],
-                                    "text": "Each br.utility.mono UI/core sends its state out of its LAST outlet as named messages: mono 0/1 and mix 0-3, the moment a control changes. Read them by NAME with [route mono mix], never by position: names stay put when a tool gains controls."
+                                    "text": "Each br.utility.mono UI sends its state out of its LAST outlet as named messages: mono 0/1 and mix 0-3, the moment a control changes. Read them by NAME with [route mono mix], never by position: names stay put when a tool gains controls."
                                 }
                             },
                             {
