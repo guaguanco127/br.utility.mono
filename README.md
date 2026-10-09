@@ -1,13 +1,13 @@
 # Max/MSP Patches, Abstractions, Externals, RNBO, VSTs, and Ableton Max for Live 
 
-## br.utility.mono.2.1
+## br.utility.mono.2.2
    
 By Brian Riordan  
 [guaguanco127@gmail.com](mailto:guaguanco127@gmail.com)  
 [brianriordanmusic@gmail.com](mailto:brianriordanmusic@gmail.com)  
 [https://www.brianriordanmusic.com/](https://www.brianriordanmusic.com/) 
   
-Repository for br.utility.mono.2.1, with all related files, can be found here: [https://github.com/guaguanco127/br.utility.mono](https://github.com/guaguanco127/br.utility.mono)  
+Repository for br.utility.mono.2.2, with all related files, can be found here: [https://github.com/guaguanco127/br.utility.mono](https://github.com/guaguanco127/br.utility.mono)  
 Additional programs can be found here: [https://github.com/guaguanco127/br.max](https://github.com/guaguanco127/br.max)
 
 These files were created with Max 9, or RNBO.
@@ -36,6 +36,12 @@ When in doubt use -6 dB: it is the only setting that can never clip.
 
 You can use it as an abstraction within Max/MSP or as a Max for Live device within Ableton Live Suite. With RNBO you can also build your own Max external or VST/AU plugin from the included RNBO patch.
 
+## <a name="New22"></a>What's new in 2.2
+
+- The [State outlet](#State) is now on the UI version only (the one with controls). It reports the controls, so moving them, numbers into the inlets and preset recalls all show up, with the same names and the same position as in 2.1.
+- The plain version (no UI) and the RNBO patch no longer have a State outlet: whatever drives them already knows the values. Their outlets are audio only again, as in 2.0.
+- The Max for Live device is unchanged apart from the version number.
+
 ## <a name="New21"></a>What's new in 2.1
 
 - New [State outlet](#State): every abstraction and the RNBO patch now send `mono 1` and `mix 3` out of their last outlet the moment a setting changes, so a display, Mira or another patch can follow along.
@@ -57,11 +63,11 @@ You can use it as an abstraction within Max/MSP or as a Max for Live device with
 
 | File | What it is |
 |---|---|
-| br.utility.mono.2.1 | No UI. The plain object to patch with |
-| br.utility.mono.ui.2.1 | With a Mono button and a Mix menu, ready for a [bpatcher] |
-| _br.utility.mono.example.2.1 | Example patch: open this first |
+| br.utility.mono.2.2 | No UI. The plain object to patch with |
+| br.utility.mono.ui.2.2 | With a Mono button and a Mix menu, ready for a [bpatcher] |
+| _br.utility.mono.example.2.2 | Example patch: open this first |
 
-The UI version contains the plain version and has the same inlets and outlets, so either swaps in without rewiring. Open the UI version in patching mode for comments on how it is built.
+The UI version contains the plain version and has the same inlets and audio outlets (plus State last), so either swaps in without rewiring. Open the UI version in patching mode for comments on how it is built.
 
 ## <a name="Use"></a>How To Use
 
@@ -73,18 +79,18 @@ The UI version contains the plain version and has the same inlets and outlets, s
 | 4 | Mix | Int | 0 = 0 dB, 1 = -3 dB, 2 = -4.5 dB, 3 = -6 dB | 3 (-6 dB) |
 
 Outlets 1 / 2: Left Out / Right Out (Signal). With Mono on, both carry the same mono signal.  
-Outlet 3: State (Message), see [State outlet](#State)
+Outlet 3 (UI version only): State (Message), see [State outlet](#State)
 
 The Mono inlet also takes a signal, so a square wave can switch between stereo and mono (the example patch shows one). In the UI version, numbers into the Mono and Mix inlets move the button and the menu, so the screen always shows what you hear. Hover any inlet or outlet in Max for its description.
 
 ## <a name="State"></a>State outlet
 
-The last outlet of every abstraction (State) sends the current settings as named messages the moment they change: `mono 1` and `mix 3`. Use it to keep a display, Mira or another patch in sync. Pick it out by name with [route mono mix], not by position, so your patch keeps working if a later version adds controls. Repeats are filtered out.
+The last outlet of the UI version (State) sends the current settings as named messages the moment they change: `mono 1` and `mix 3`. Use it to keep a display, Mira or another patch in sync. Pick it out by name with [route mono mix], not by position, so your patch keeps working if a later version adds controls. Repeats are filtered out.
 
 | Message | Type | Range |
 |---|---|---|
 | mono | Int | 0 - 1, 1 = mono |
 | mix | Int | menu index 0 - 3: 0 = 0 dB, 1 = -3 dB, 2 = -4.5 dB, 3 = -6 dB |
 
-Only numbers are reported: if a signal drives the Mono inlet of the plain version, nothing comes out of State. Mix is sent as the menu index, the same number the Mix inlet takes, so a State message can go straight back into an inlet. The example patch has a State outlet tab that shows all of this, and the RNBO patch shows the same [route mono mix].
+The plain version has no State outlet: whatever drives it already knows the values. Mix is sent as the menu index, the same number the Mix inlet takes, so a State message can go straight back into an inlet. The example patch has a State outlet tab that shows all of this.
 
