@@ -726,8 +726,8 @@
                                             "rect": [
                                                 100.0,
                                                 100.0,
-                                                780.0,
-                                                720.0
+                                                901.0,
+                                                877.0
                                             ],
                                             "bglocked": 0,
                                             "openinpresentation": 0,
@@ -774,9 +774,9 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            50.0,
                                                             20.0,
-                                                            200.0,
+                                                            20.0,
+                                                            189.0,
                                                             22.0
                                                         ],
                                                         "text": "in 1 @comment \"Left In (Signal)\""
@@ -794,9 +794,9 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            265.0,
+                                                            224.0,
                                                             20.0,
-                                                            200.0,
+                                                            197.0,
                                                             22.0
                                                         ],
                                                         "text": "in 2 @comment \"Right In (Signal)\""
@@ -814,12 +814,13 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            480.0,
+                                                            436.0,
                                                             20.0,
                                                             200.0,
-                                                            22.0
+                                                            76.0
                                                         ],
-                                                        "text": "in 3 @comment \"Mono (Signal/Float) 0 = off, stereo passes through. 1 = on, L + R to both outputs. 10 ms crossfade. Default 1\" @default 1"
+                                                        "text": "in 3 @comment \"Mono (Signal/Float) 0 = off, stereo passes through. 1 = on, L + R to both outputs. 10 ms crossfade. Default 1\" @default 1",
+                                                        "linecount": 5
                                                     }
                                                 },
                                                 {
@@ -834,12 +835,13 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            695.0,
+                                                            651.0,
                                                             20.0,
                                                             200.0,
-                                                            22.0
+                                                            116.0
                                                         ],
-                                                        "text": "in 4 @comment \"Mix (Int) how L + R are combined. 0 = 0 dB (sound on one side only), 1 = -3 dB (stereo, L and R different), 2 = -4.5 dB (full mix, centered and wide parts), 3 = -6 dB (dual mono, L = R). 10 ms glide. Default 3\" @default 3"
+                                                        "text": "in 4 @comment \"Mix (Int) how L + R are combined. 0 = 0 dB (sound on one side only), 1 = -3 dB (stereo, L and R different), 2 = -4.5 dB (full mix, centered and wide parts), 3 = -6 dB (dual mono, L = R). 10 ms glide. Default 3\" @default 3",
+                                                        "linecount": 8
                                                     }
                                                 },
                                                 {
@@ -853,8 +855,8 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            50.0,
-                                                            70.0,
+                                                            20.0,
+                                                            188.0,
                                                             645.0,
                                                             560.0
                                                         ],
@@ -874,12 +876,13 @@
                                                         "numoutlets": 0,
                                                         "outlettype": [],
                                                         "patching_rect": [
-                                                            50.0,
-                                                            650.0,
+                                                            20.0,
+                                                            778.0,
                                                             200.0,
-                                                            22.0
+                                                            49.0
                                                         ],
-                                                        "text": "out 1 @comment \"Left Out (Signal) the mono sum when Mono is on\""
+                                                        "text": "out 1 @comment \"Left Out (Signal) the mono sum when Mono is on\"",
+                                                        "linecount": 3
                                                     }
                                                 },
                                                 {
@@ -892,12 +895,13 @@
                                                         "numoutlets": 0,
                                                         "outlettype": [],
                                                         "patching_rect": [
-                                                            265.0,
-                                                            650.0,
+                                                            646.0,
+                                                            778.0,
                                                             200.0,
-                                                            22.0
+                                                            49.0
                                                         ],
-                                                        "text": "out 2 @comment \"Right Out (Signal) same as left when Mono is on\""
+                                                        "text": "out 2 @comment \"Right Out (Signal) same as left when Mono is on\"",
+                                                        "linecount": 3
                                                     }
                                                 }
                                             ],
@@ -923,6 +927,12 @@
                                                         "destination": [
                                                             "obj-cb",
                                                             1
+                                                        ],
+                                                        "midpoints": [
+                                                            233.5,
+                                                            163.0,
+                                                            238.16666666666666,
+                                                            163.0
                                                         ]
                                                     }
                                                 },
@@ -947,6 +957,12 @@
                                                         "destination": [
                                                             "obj-cb",
                                                             3
+                                                        ],
+                                                        "midpoints": [
+                                                            660.5,
+                                                            151.0,
+                                                            655.5,
+                                                            151.0
                                                         ]
                                                     }
                                                 },
